@@ -1,8 +1,11 @@
 class Negociacao {
-  constructor(data, quantidade, valor) {
-    this._data = data;
-    this._quantidade = quantidade;
-    this._valor = valor;
+  constructor(_data, _quantidade, _valor) {
+    Object.assign(this, {
+      _quantidade,
+      _valor,
+    });
+    this._data = new Date(_data.getTime());
+    Object.freeze(this);
   }
 
   get volume() {
@@ -10,7 +13,7 @@ class Negociacao {
   }
 
   get data() {
-    return this._data;
+    return new Date(this._data.getTime());
   }
 
   get quantidade() {
@@ -22,11 +25,8 @@ class Negociacao {
   }
 }
 
-const n1 = new Negociacao(new Date(), 5, 700);
-Object.freeze(n1);
-
-n1._quantidade = 50;
-console.log(">>> Quantidade: ", n1.quantidade);
-console.log(">>> Data: ", n1.data);
-console.log(">>> Valor: ", n1.valor);
-console.log(">>> Volume: ", n1.volume);
+let hoje = new Date();
+const n1 = new Negociacao(hoje, 5, 700);
+console.log(n1.data);
+hoje.setDate(11);
+console.log(n1.data);
