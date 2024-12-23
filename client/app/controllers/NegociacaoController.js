@@ -9,8 +9,11 @@ class NegociacaoController {
   adiciona(event) {
     event.preventDefault();
 
-    console.log(this._inputData.value.split("-").reverse().join("/"));
-    console.log(this._inputQuantidade.value);
-    console.log(this._inputValor.value);
+    let data = new Date(...this._inputData.value.split("-"));
+    let negociacao = new Negociacao(
+      this._inputData.value,
+      parseInt(this._inputQuantidade.value),
+      parseInt(this._inputValor.value)
+    );
   }
 }
